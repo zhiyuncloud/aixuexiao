@@ -1,7 +1,11 @@
 aixuexiao
 =========
 
-一个基于SAE Java平台的微信平台公众帐号应用例子。详情访问：http://aixuexiao.sinaapp.com
+一个基于SAE Java平台的微信平台公众帐号应用例子。
+
+详情访问：http://aixuexiao.sinaapp.com
+微信公众帐号：爱学校(aixuexiao)
+
 
 微信公众帐号功能为作为学生家长和学校老师之间的沟通桥梁。
 学生家长可通过和微信公众帐号交互来获取学生在校的考试情况／班级动态／老师留言等信息。
