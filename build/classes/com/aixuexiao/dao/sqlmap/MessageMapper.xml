@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aixuexiao.dao.MessageDao">
+    
+	<insert id="addMessage" parameterType="com.aixuexiao.model.Message">
+		insert into message (tousername,fromusername,msgtype,createtime,msgid,content,picurl,title,description,url,locationx,locationy,scale,label,event,eventkey)
+		 values(#{toUserName},#{fromUserName},#{msgType},#{createTime},#{msgId},#{content},#{picUrl},#{title},#{description},#{url},#{locationX},#{locationY},#{scale},#{label},#{event},#{eventKey})
+	</insert>
+	
+	<select id="selectMessage"  parameterType="int"   resultMap="messageMap"  >
+	   select id,tousername,fromusername,msgtype,createtime,msgid,content,picurl,title,description,url,locationx,locationy,scale,label,event,eventkey 
+	   from message 
+	   order by createtime desc 
+	   limit #{start},#{size}
+	</select>
+	    
+	<resultMap type="Message" id="messageMap">
+	     <id property="id" column="id" />  
+	     <result property="toUserName" column="tousername"/>  
+	     <result property="fromUserName" column="fromusername"/>
+	     <result property="msgType" column="msgtype"/>
+	     <result property="createTime" column="createtime"/>
+	     <result property="msgId" column="msgid"/>
+	     <result property="picUrl" column="picurl"/>
+	     <result property="title" column="title"/>
+	     <result property="description" column="description"/>
+		 <result property="url" column="url"/>
+		 <result property="locationX" column="locationx"/>
+		 <result property="locationY" column="locationy"/>
+		 <result property="scale" column="scale"/>
+		 <result property="label" column="label"/>
+		 <result property="event" column="event"/>
+		 <result property="eventKey" column="eventkey"/>
+	</resultMap>
+	
+</mapper>

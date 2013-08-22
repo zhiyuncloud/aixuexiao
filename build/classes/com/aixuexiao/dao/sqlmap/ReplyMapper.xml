@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aixuexiao.dao.ReplyDao">
+	
+    
+	<insert id="addReply" parameterType="com.aixuexiao.model.Reply"> 
+	    <selectKey    keyProperty="id" resultType="int" order="AFTER"> 
+	      SELECT LAST_INSERT_ID() AS id
+	    </selectKey> 
+	    insert into reply(tousername,fromusername,msgtype,createtime,content,musicurl,hqmusicurl,articlecount) 
+	    values (#{toUserName},#{fromUserName},#{msgType},#{createTime},#{content},#{musicUrl},#{hQMusicUrl},#{articleCount}) 
+	</insert>
+
+	<insert id="addArticle"    parameterType="com.aixuexiao.model.Article"> 
+	    INSERT INTO reply_article (replyid,title,description,picurl,url ) 
+	    VALUES(#{replyId},#{title},#{description},#{picUrl},#{url}) 
+	 </insert>    
+
+	<select id="selectReply"  parameterType="int" resultMap="replyMap">
+	   select id,tousername,fromusername,msgtype,createtime,content,musicurl,hqmusicurl,articlecount 
+	   from reply
+	   order by createtime desc 
+	   limit #{start},#{size}
+	</select>
+	
+	<select id="selectReplyById"  parameterType="int" resultMap="replyMap">
+	   select id,tousername,fromusername,msgtype,createtime,content,musicurl,hqmusicurl,articlecount 
+	   from reply
+	   where id = #{id} 
+	</select>
+	
+	<select id="selectArticleByReplyId"  parameterType="int" resultMap="articleMap">
+	   select id,replyid,title,description,picurl,url 
+	   from reply_article
+	   where replyid = #{replyid} 
+	</select>
+	
+	<resultMap type="Reply" id="replyMap">
+	     <id property="id" column="id" />  
+	     <result property="toUserName" column="tousername"/>  
+	     <result property="fromUserName" column="fromusername"/>
+	     <result property="msgType" column="msgtype"/>
+	     <result property="createTime" column="createtime"/>
+	     <result property="content" column="content"/>
+	     <result property="musicUrl" column="musicurl"/>
+	     <result property="hQMusicUrl" column="hqmusicurl"/>
+		<result property="articleCount" column="articlecount"/>
+	    <collection property="articles" column="id" ofType="Article" select="selectArticleByReplyId"/> 
+	</resultMap>
+	
+	<resultMap type="Article" id="articleMap">
+	   	 <id property="id" column="id" />  
+	     <result property="title" column="title"/>  
+	     <result property="description" column="description"/>
+	     <result property="picUrl" column="picurl"/>
+	     <result property="url" column="url"/>
+	     <result property="replyId" column="replyid"/>
+	     <association property="reply" javaType="Reply"  column="replyid" select="selectReplyById"/> 
+	</resultMap>
+	
+</mapper>

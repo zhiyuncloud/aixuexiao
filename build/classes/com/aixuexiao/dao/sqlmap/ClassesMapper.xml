@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aixuexiao.dao.ClassesDao">
+	
+    <select id="selectAllClasses"  parameterType="int"   resultMap="classesMap"  >
+	   select id,name,headteacher,studentcount  
+	   from class  
+	   order by id  
+	</select>
+    
+    <select id="selectClassesById"  parameterType="int"   resultMap="classesMap"  >
+	   select id,name,headteacher,studentcount  
+	   from class  
+	   where id = #{id}
+	</select>
+    
+    <update id="updateClassStudentCount" parameterType="int">
+        update class set  studentcount = (select count(id) from student where classid = #{id})
+        where id = #{id}
+        
+    </update>
+    
+	<select id="selectClasses"  parameterType="java.util.HashMap"   resultMap="classesMap"  >
+	   select id,name,headteacher,studentcount  
+	   from class  
+	   <where>
+	       <if test="classes.name!=null">
+		  	 name like  CONCAT('%','${classes.name}','%' )
+	       </if>
+	   </where>
+	   order by id  
+	   limit #{start},#{size}
+	</select>
+	
+	<insert id="addClasses" parameterType="com.aixuexiao.model.Classes">
+		insert into class (id,name,headteacher,studentcount)
+		 values(#{id},#{name},#{headteacher},#{studentcount})
+	</insert>
+	
+	 <resultMap type="Classes" id="classesMap">
+	     <id property="id" column="id" />  
+	     <result property="name" column="name"/>  
+	     <result property="headteacher" column="headteacher"/>
+	     <result property="studentcount" column="studentcount"/>
+	</resultMap>
+	 
+</mapper>
