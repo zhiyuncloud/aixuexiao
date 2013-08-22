@@ -13,6 +13,10 @@ aixuexiao
 
 应用基于SAE Java平台开发，使用（Spring/SpringMVC/Mybatis）框架开发，有相同需求（在SAE Java平台搭建微信公众帐号后台）的同学可用拿去作为参考，当然也可用作为在SAE Java平台中使用框架的例子程序作为参考。
 
+微信的验证和回复的入口程序在com.aixuexiao.web.controller.WeixinController.java中。
+其中initWeixinURL（对应URL:/weixin GET）方法为验证方法。replyMessage（对应URL:/weixin POST）方法则是回复方法。
+
+
 注：时间仓促且第一次使用SpringMVC，不优雅的代码敬请指出。
 有任何问题可用联系我
 zhiyun.cloud@gmail.com
