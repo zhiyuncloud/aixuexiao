@@ -17,6 +17,10 @@ aixuexiao
 其中initWeixinURL（对应URL:/weixin GET）方法为验证方法。
 replyMessage（对应URL:/weixin POST）方法则是回复方法。
 
+直接下载本项目在SAE Java平台上搭建需要改动地方：
+1.在你创建SAE应用的MySQL中执行应用根目录下的app_aixuexiao.sql文件（包括表结构和部分测试数据）；
+2.修改src下db.properties文件中的数据库信息ak、sk分别设置为你SAE应用中的ak和sk即可。
+
 
 注：时间仓促且第一次使用SpringMVC，不优雅的代码敬请指出。
 
