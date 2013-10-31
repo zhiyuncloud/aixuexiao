@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `class` (
 --
 INSERT INTO `class` (`id`, `name`, `headteacher`, `studentcount`) VALUES
 (302, '三年级二班', '赖导', 7),
-(301, '三年级一班', '曾近荣', 7),
+(301, '三年级一班', '曾近荣', 7);
 
 -- --------------------------------------------------------
 
